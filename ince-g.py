@@ -3,9 +3,11 @@ import matplotlib.pyplot as plt
 import math
 # from itertools import permutations 
 
+#--------------------------------------------------------------------
 
+####### To find in which quadrant the point is present
 def whichqua(x,y):
-    print(x,y,"insode")
+    
     if(x>= 50 and y>=50):
         return 0
     if(x>= 50 and y<50):
@@ -18,10 +20,13 @@ def whichqua(x,y):
     return 4
 
 
+#--------------------------------------------------------------------
+
+####### Mark the point according to the quadrant
 def mark( x, y, val):
     qua = whichqua(x,y)
     distance = 1.5
-    print( x, y, qua , "printing qua")
+   
     if(qua == 0):
         x = x + distance
         y = y+distance
@@ -39,6 +44,9 @@ def mark( x, y, val):
     plt.text(x,y, val, fontsize=9)
 
 
+#--------------------------------------------------------------------
+
+####### Plot the edges using matplotlib
 def plotgraph(edges):
 
 
@@ -62,12 +70,17 @@ def plotgraph(edges):
 
         mark( x0, y0, edges[i][0] )
         mark( x1, y1, edges[i][1] )
+
         #to indicate the self loop
         if( x1 == x0 and y1 == y0):
             plt.scatter(x1, y1, marker='.', color='green')
     
     plt.show()
 
+
+#--------------------------------------------------------------------
+
+####### Form the graph from the given matrix
 
 def drawgraph(permuts, no_edge, no_vert, x, y, start, end, verts):
 
@@ -111,18 +124,16 @@ def drawgraph(permuts, no_edge, no_vert, x, y, start, end, verts):
     print(edges,"edges")
     return edges
     
-    
 
-
-    
-
+#-------------------------------------------------------------------------------------------------------------------
 
 if __name__ == "__main__":
 
 
     midx, midy = 50, 50
     radius = 25
-    matrix = [[1, 1, 0, 0], [0, 0, 1, 1], [1, 0, 1, 0], [0, 1, 0, 1]]
+
+    # matrix = [[1, 1, 0, 0], [0, 0, 1, 1], [1, 0, 1, 0], [0, 1, 0, 1]]
 
     # matrix =[[1,1,1,0, 0, 0], [1, 0, 0,1,1,0],[0,1,0,1,0,1], [0,0,1,0,1,1]]
 
@@ -148,10 +159,14 @@ if __name__ == "__main__":
     pi = 3.141
     x = []
     y = []
+    
+    ## In reference to a circle
+
     for i in range(n):
         x.append(radius * math.cos(2*pi*i/n) + midx)
         y.append(radius * math.sin(2*pi*i/n) + midy)
 
+    
     edges = drawgraph(permuts, no_edge, no_vert, x, y, start, end, verts)
 
     plotgraph(edges)
